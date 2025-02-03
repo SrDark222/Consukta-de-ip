@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de IP</title>
+    <title>Analisar IP - Painel de Consulta 1.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Consulta de IP</h1>
-            <input type="text" id="ipInput" placeholder="Digite um endereço IP">
-            <button id="consultarBtn">Consultar</button>
+        <header class="header">
+            <h1>🇪🇬 PAINEL DE CONSULTA 1.0</h1>
         </header>
         <main>
+            <input type="text" id="ipInput" placeholder="Digite um endereço IP" list="ipSuggestions">
+            <datalist id="ipSuggestions">
+                <option value="8.8.8.8">
+                <option value="8.8.4.4">
+                <option value="192.168.1.1">
+                <option value="172.217.0.0">
+            </datalist>
+            <button id="consultarBtn">Consultar</button>
             <div id="resultado" class="resultado"></div>
         </main>
     </div>
