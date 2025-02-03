@@ -1,7 +1,6 @@
-/* Fundo com imagem */
+/* Configuração do fundo dinâmico (imagens/gifs/vídeos trocando a cada 10 segundos) */
 body {
-    background: url('fundo.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-color: black;
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -9,18 +8,28 @@ body {
     align-items: center;
     height: 100vh;
     color: white;
+    overflow: hidden;
 }
 
-/* Container centralizado */
 .container {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px cyan;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px cyan;
     text-align: center;
+    width: 90%;
+    max-width: 900px;
+    overflow-y: auto;
 }
 
-/* Input e botão estilizados */
+/* Formatação de texto */
+h1, h2, h3 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: cyan;
+}
+
+/* Input e botão */
 input {
     width: 80%;
     padding: 10px;
@@ -46,14 +55,30 @@ button:hover {
     background: lime;
 }
 
-/* Resultado estilizado */
+/* Scroll para informações */
+.info-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Layout do mapa */
+#map {
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px cyan;
+}
+
+/* Resultado de consulta */
 #resultado {
     margin-top: 20px;
     font-size: 18px;
     color: cyan;
 }
 
-/* IP Info */
 #ip-info {
     margin-top: 20px;
     font-size: 16px;
