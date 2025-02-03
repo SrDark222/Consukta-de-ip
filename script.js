@@ -19,6 +19,10 @@ function consultaIP() {
         .then(response => response.json())
         .then(data => {
             // Exibe as informações do IP
+            if (data.status === "fail") {
+                ipInfoElement.innerHTML = 'Erro ao obter dados do IP.';
+                return;
+            }
             ipInfoElement.innerHTML = `
                 <strong>IP:</strong> ${data.query} <br>
                 <strong>Cidade:</strong> ${data.city} <br>
@@ -28,7 +32,8 @@ function consultaIP() {
                 <strong>Longitude:</strong> ${data.lon} <br>
                 <strong>Organização:</strong> ${data.org} <br>
             `;
-            initMap(data.lat, data.lon, data.city); // Passa a latitude e longitude para o mapa
+            // Chama a função para inicializar o mapa com os dados de latitude e longitude
+            initMap(data.lat, data.lon, data.city);
         })
         .catch(error => {
             ipInfoElement.innerHTML = 'Erro ao buscar dados do IP.';
@@ -38,6 +43,12 @@ function consultaIP() {
 
 // Inicializa o mapa com o Google Maps
 function initMap(lat, lon, city) {
+    // Verifica se a latitude e longitude foram passadas corretamente
+    if (!lat || !lon) {
+        console.error('Latitude ou Longitude não encontrados.');
+        return;
+    }
+
     const mapOptions = {
         center: { lat: lat, lng: lon },
         zoom: 10,
