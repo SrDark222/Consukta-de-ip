@@ -3,14 +3,10 @@ function consultarIP() {
   var ip = document.getElementById('ip-address').value;
   var loadingElement = document.getElementById('loading');
   var resultsElement = document.getElementById('results');
-  var ipInfoElement = document.getElementById('ip-info');
-  var locationInfoElement = document.getElementById('location-info');
   
   // Exibir o gif de carregamento
   loadingElement.style.display = 'block';
   resultsElement.innerHTML = '';
-  ipInfoElement.innerHTML = '';
-  locationInfoElement.innerHTML = '';
 
   // Verifica se o campo de IP está vazio
   if (!ip) {
@@ -27,7 +23,7 @@ function consultarIP() {
     .then(data => {
       // Esconde o gif de carregamento
       loadingElement.style.display = 'none';
-      
+
       // Verifica se houve algum erro na consulta
       if (data.status === 'fail') {
         resultsElement.innerHTML = `<p>Erro ao consultar o IP.</p>`;
@@ -35,22 +31,13 @@ function consultarIP() {
       }
 
       // Exibe os dados do IP
-      ipInfoElement.innerHTML = `
+      resultsElement.innerHTML = `
         <p><strong>IP:</strong> ${ip}</p>
         <p><strong>País:</strong> ${data.country}</p>
         <p><strong>Região:</strong> ${data.region}</p>
         <p><strong>Cidade:</strong> ${data.city}</p>
         <p><strong>ISP:</strong> ${data.isp}</p>
       `;
-      
-      // Exibe as informações de localização (latitude e longitude)
-      locationInfoElement.innerHTML = `
-        <p><strong>Latitude:</strong> ${data.lat}</p>
-        <p><strong>Longitude:</strong> ${data.lon}</p>
-      `;
-
-      // Mostrar o mapa usando o Google Maps
-      initMap(data.lat, data.lon);
     })
     .catch(error => {
       loadingElement.style.display = 'none';
@@ -58,44 +45,9 @@ function consultarIP() {
     });
 }
 
-// Função para inicializar o mapa com base na latitude e longitude
-function initMap(lat, lon) {
-  // Inicializando o mapa
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: lat, lng: lon },
-    zoom: 10,
-    styles: [
-      {
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#212121"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#757575"
-          }
-        ]
-      }
-    ]
-  });
-
-  // Adicionando um marcador no mapa
-  var marker = new google.maps.Marker({
-    position: { lat: lat, lng: lon },
-    map: map,
-    title: "Localização do IP"
-  });
+// Função para gerar um HWID
+function gerarHWID() {
+  var hwid = "HWID-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+  var hwidResultElement = document.getElementById('hwid-result');
+  hwidResultElement.innerHTML = `<p><strong>Seu HWID: </strong>${hwid}</p>`;
 }
