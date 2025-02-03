@@ -1,85 +1,71 @@
-// Função de consulta (campo de texto)
-function consultar() {
-    const input = document.getElementById("consultaInput").value;
-    const resultado = document.getElementById("resultado");
+// Função para consultar o IP
+async function consultarIP() {
+  const ip = document.getElementById('ip-address').value;
+  if (!ip) {
+    alert('Por favor, digite um IP válido.');
+    return;
+  }
+  
+  document.getElementById('loading').style.display = 'block'; // Mostrar carregando
 
-    if (input === "") {
-        resultado.innerHTML = "Digite um IP para consultar!";
-        resultado.style.color = "red";
-    } else {
-        resultado.innerHTML = `Resultado encontrado para: <b>${input}</b>`;
-        resultado.style.color = "cyan";
-        carregarDadosIP();
-    }
+  try {
+    // Solicitação para consultar o IP usando uma API pública
+    const response = await fetch(`https://ipinfo.io/${ip}/json`);
+    const data = await response.json();
+
+    // Exibir os resultados
+    document.getElementById('results').innerHTML = `
+      <p><strong>IP:</strong> ${data.ip}</p>
+      <p><strong>Org:</strong> ${data.org}</p>
+      <p><strong>City:</strong> ${data.city}</p>
+      <p><strong>Country:</strong> ${data.country}</p>
+    `;
+    
+    // Exibir mapa com base na localização
+    showMap(data.loc);
+  } catch (error) {
+    document.getElementById('results').innerHTML = `<p>Erro ao consultar IP</p>`;
+  } finally {
+    document.getElementById('loading').style.display = 'none'; // Ocultar carregando
+  }
 }
 
-// Função de Carregar Dados IP
-function carregarDadosIP() {
-    const loading = document.getElementById("loading");
-    const infoScroll = document.getElementById("infoScroll");
-    loading.style.display = "block"; // Exibe o loading
-    setTimeout(() => {
-        consultaIP();
-        loading.style.display = "none"; // Esconde o loading após 10 segundos
-        infoScroll.style.display = "block"; // Exibe a área de resultados
-    }, 10000); // 10 segundos de espera para simular carregamento
+// Função para mostrar mapa usando a API do Google Maps
+function showMap(location) {
+  const [latitude, longitude] = location.split(',');
+  
+  // Criando um mapa com o Google Maps
+  const mapOptions = {
+    center: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+    zoom: 10,
+    mapTypeId: 'roadmap',
+  };
+
+  const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  
+  const marker = new google.maps.Marker({
+    position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+    map: map,
+    title: 'Localização IP',
+  });
 }
 
-// Função para consultar o IP via API
-function consultaIP() {
-    const ipInfoElement = document.getElementById('ip-info');
-    fetch('https://ip-api.com/json')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "fail") {
-                ipInfoElement.innerHTML = 'Erro ao obter dados do IP.';
-                return;
-            }
-            ipInfoElement.innerHTML = `
-                <strong>IP:</strong> ${data.query} <br>
-                <strong>Cidade:</strong> ${data.city} <br>
-                <strong>Região:</strong> ${data.regionName} <br>
-                <strong>País:</strong> ${data.country} <br>
-                <strong>Latitude:</strong> ${data.lat} <br>
-                <strong>Longitude:</strong> ${data.lon} <br>
-                <strong>Organização:</strong> ${data.org} <br>
-            `;
-            initMap(data.lat, data.lon, data.city);
-        })
-        .catch(error => {
-            ipInfoElement.innerHTML = 'Erro ao buscar dados do IP.';
-            console.error('Erro na consulta da API:', error);
-        });
+// Função para trocar o wallpaper
+function changeWallpaper() {
+  const wallpapers = [
+    "wallpaper/1784-thunder-pfpsgg.gif",
+    "wallpaper/4852-graveyard-grim-pfpsgg.gif",
+    "wallpaper/8007-code-pfpsgg.gif",
+    "wallpaper/DUwB.gif",
+    "wallpaper/rdk.ney1.gif"
+  ];
+
+  let index = 0;
+  setInterval(() => {
+    document.body.style.backgroundImage = `url(${wallpapers[index]})`;
+    index = (index + 1) % wallpapers.length;
+  }, 10000); // Trocar a cada 10 segundos
 }
 
-// Inicializa o Google Maps
-function initMap(lat, lon, city) {
-    const mapOptions = {
-        center: { lat: lat, lng: lon },
-        zoom: 10,
-        mapTypeId: 'roadmap'
-    };
-
-    const map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    const marker = new google.maps.Marker({
-        position: { lat: lat, lng: lon },
-        map: map,
-        title: city
-    });
-}
-
-// Funções para mostrar as informações
-function mostrarIpInfo() {
-    document.getElementById("ip-info").style.display = "block";
-    document.getElementById("map").style.display = "none";
-}
-
-function mostrarLocalizacao() {
-    document.getElementById("ip-info").style.display = "none";
-    document.getElementById("map").style.display = "block";
-}
-
-function mostrarEndereco() {
-    document.getElementById("ip-info").style.display = "block";
-    document.getElementById("map").style.display = "block";
-}
+// Chama a função para trocar wallpaper ao carregar a página
+window.onload = changeWallpaper;
