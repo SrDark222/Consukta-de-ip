@@ -16,7 +16,7 @@ function validarIP(ip) {
 }
 
 function consultarIP(ip) {
-    fetch(`https://ipinfo.io/${ip}/json?token=YOUR_API_TOKEN`)
+    fetch(`https://ipinfo.io/${ip}/json?token=890f28f37c804d`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao consultar IP');
