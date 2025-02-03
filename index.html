@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Dados</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -12,8 +13,13 @@
         <input type="text" id="consultaInput" placeholder="Digite algo...">
         <button onclick="consultar()">Consultar</button>
         <div id="resultado"></div>
-        <h2>Informações sobre seu IP:</h2>
-        <div id="ip-info"></div>
+
+        <div id="infoScroll" class="info-scroll">
+            <h2>Informações sobre seu IP:</h2>
+            <div id="ip-info"></div>
+            <h3>Localização no Mapa:</h3>
+            <div id="map" class="map"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
