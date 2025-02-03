@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta de IP</title>
+  <title>Consulta de IP e HWID</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  
-  <!-- Carregar a API do Google Maps (opcional) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 </head>
-
 <body>
-  <!-- Conteúdo principal -->
   <div id="main-container">
-    <div id="scrolling-container">
-      <h1>Consulta de IP</h1>
-      <div class="input-container">
-        <input type="text" id="ip-address" placeholder="Digite o IP">
-        <button onclick="consultarIP()">Consultar</button>
-      </div>
+    <div id="banner">
+      <h1>Consulta de IP e Geração de HWID</h1>
+      <p>Digite o seu IP para consultar ou gerar um HWID exclusivo</p>
+    </div>
+    <div id="ip-query">
+      <input type="text" id="ip-address" placeholder="Digite o IP">
+      <button onclick="consultarIP()">Consultar IP</button>
       <div id="loading" style="display: none;">
         <img src="loading.gif" alt="Carregando...">
       </div>
       <div id="results"></div>
-      <div id="map"></div>
+    </div>
+    <div id="hwid-section">
+      <button onclick="gerarHWID()">Gerar HWID</button>
+      <div id="hwid-result"></div>
+    </div>
+    <div id="footer">
+      <p>&copy; 2025 StickXIP - Todos os direitos reservados</p>
     </div>
   </div>
-
-  <!-- Caixa de informações -->
-  <div id="info-container">
-    <h2>Informações</h2>
-    <div id="ip-info"></div>
-    <div id="location-info"></div>
-  </div>
-
 </body>
-
 </html>
