@@ -1,4 +1,4 @@
-/* Configuração do fundo dinâmico (imagens/gifs/vídeos trocando a cada 10 segundos) */
+/* Estilo básico */
 body {
     background-color: black;
     margin: 0;
@@ -22,14 +22,12 @@ body {
     overflow-y: auto;
 }
 
-/* Formatação de texto */
-h1, h2, h3 {
+h1, h2 {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
     color: cyan;
 }
 
-/* Input e botão */
 input {
     width: 80%;
     padding: 10px;
@@ -55,7 +53,6 @@ button:hover {
     background: lime;
 }
 
-/* Scroll para informações */
 .info-scroll {
     max-height: 400px;
     overflow-y: auto;
@@ -63,7 +60,6 @@ button:hover {
     padding: 10px;
 }
 
-/* Layout do mapa */
 #map {
     height: 300px;
     width: 100%;
@@ -72,15 +68,30 @@ button:hover {
     box-shadow: 0px 0px 10px cyan;
 }
 
-/* Resultado de consulta */
-#resultado {
-    margin-top: 20px;
-    font-size: 18px;
-    color: cyan;
+#loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
 }
 
-#ip-info {
+.menu {
     margin-top: 20px;
-    font-size: 16px;
-    color: lightgreen;
+}
+
+.menu button {
+    margin: 10px;
+    padding: 10px;
+    background: cyan;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.menu button:hover {
+    background: lime;
 }
