@@ -1,53 +1,45 @@
-// Função para consultar o IP usando a API ip-api.com
-function consultarIP() {
-  var ip = document.getElementById('ip-address').value;
-  var loadingElement = document.getElementById('loading');
-  var resultsElement = document.getElementById('results');
-  
-  // Exibir o gif de carregamento
-  loadingElement.style.display = 'block';
-  resultsElement.innerHTML = '';
+document.getElementById('consultarBtn').addEventListener('click', function() {
+    const ip = document.getElementById('ipInput').value;
+    const resultadoDiv = document.getElementById('resultado');
 
-  // Verifica se o campo de IP está vazio
-  if (!ip) {
-    alert("Digite um IP para consultar!");
-    loadingElement.style.display = 'none';
-    return;
-  }
-
-  // API para consulta do IP
-  var url = `http://ip-api.com/json/${ip}?fields=country,region,city,isp,lat,lon`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      // Esconde o gif de carregamento
-      loadingElement.style.display = 'none';
-
-      // Verifica se houve algum erro na consulta
-      if (data.status === 'fail') {
-        resultsElement.innerHTML = `<p>Erro ao consultar o IP.</p>`;
+    if (!validarIP(ip)) {
+        resultadoDiv.innerHTML = '<p style="color: red;">Endereço IP inválido. Tente novamente.</p>';
         return;
-      }
+    }
 
-      // Exibe os dados do IP
-      resultsElement.innerHTML = `
-        <p><strong>IP:</strong> ${ip}</p>
-        <p><strong>País:</strong> ${data.country}</p>
-        <p><strong>Região:</strong> ${data.region}</p>
-        <p><strong>Cidade:</strong> ${data.city}</p>
-        <p><strong>ISP:</strong> ${data.isp}</p>
-      `;
-    })
-    .catch(error => {
-      loadingElement.style.display = 'none';
-      resultsElement.innerHTML = `<p>Erro na requisição: ${error.message}</p>`;
-    });
+    consultarIP(ip);
+});
+
+function validarIP(ip) {
+    const padraoIP = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
+    return padraoIP.test(ip);
 }
 
-// Função para gerar um HWID
-function gerarHWID() {
-  var hwid = "HWID-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-  var hwidResultElement = document.getElementById('hwid-result');
-  hwidResultElement.innerHTML = `<p><strong>Seu HWID: </strong>${hwid}</p>`;
+function consultarIP(ip) {
+    fetch(`https://ipinfo.io/${ip}/json?token=YOUR_API_TOKEN`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao consultar IP');
+            }
+            return response.json();
+        })
+        .then(data => {
+            exibirResultado(data);
+        })
+        .catch(error => {
+            document.getElementById('resultado').innerHTML = `<p style="color: red;">${error.message}</p>`;
+        });
+}
+
+function exibirResultado(data) {
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.innerHTML = `
+        <h3>Informações sobre o IP ${data.ip}:</h3>
+        <p><strong>Cidade:</strong> ${data.city || 'N/A'}</p>
+        <p><strong>Região:</strong> ${data.region || 'N/A'}</p>
+        <p><strong>País:</strong> ${data.country || 'N/A'}</p>
+        <p><strong>Localização:</strong> ${data.loc || 'N/A'}</p>
+        <p><strong>Organização:</strong> ${data.org || 'N/A'}</p>
+        <p><strong>Código Postal:</strong> ${data.postal || 'N/A'}</p>
+    `;
 }
