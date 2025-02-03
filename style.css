@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #000;
     color: #fff;
     margin: 0;
@@ -13,9 +13,9 @@ body {
     padding: 20px;
     background: rgba(30, 30, 30, 0.8);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
     position: relative;
-    z-index: 1;
+    backdrop-filter: blur(10px);
 }
 
 header {
@@ -29,6 +29,7 @@ header {
 
 h1 {
     color: #00ff00; /* Verde neon */
+    text-shadow: 0 0 10px #00ff00;
 }
 
 input[type="text"] {
@@ -39,6 +40,7 @@ input[type="text"] {
     border-radius: 4px;
     background: rgba(50, 50, 50, 0.8);
     color: #fff;
+    backdrop-filter: blur(5px);
 }
 
 button {
@@ -50,6 +52,7 @@ button {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -62,6 +65,7 @@ button:hover {
     border: 1px solid #00ff00; /* Verde neon */
     border-radius: 4px;
     background-color: rgba(50, 50, 50, 0.8);
+    backdrop-filter: blur(5px);
 }
 
 @keyframes glow {
@@ -72,4 +76,22 @@ button:hover {
 
 h1 {
     animation: glow 1.5s infinite alternate;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(0, 255, 0, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
 }
