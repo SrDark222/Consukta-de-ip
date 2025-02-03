@@ -2,7 +2,7 @@ document.getElementById('consultarBtn').addEventListener('click', function() {
     const ip = document.getElementById('ipInput').value;
     const resultadoDiv = document.getElementById('resultado');
 
-    if (!validarIP(ip)) {
+    if (!validar IP(ip)) {
         resultadoDiv.innerHTML = '<p style="color: red;">Endereço IP inválido. Tente novamente.</p>';
         return;
     }
@@ -17,7 +17,6 @@ function validarIP(ip) {
 
 function consultarIP(ip) {
     fetch(`https://ipinfo.io/${ip}/json?token=890f28f37c804d`)
- ```javascript
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro ao consultar IP');
