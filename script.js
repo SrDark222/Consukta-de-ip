@@ -2,7 +2,7 @@ document.getElementById('consultarBtn').addEventListener('click', function() {
     const ip = document.getElementById('ipInput').value;
     const resultadoDiv = document.getElementById('resultado');
 
-    if (!validar IP(ip)) {
+    if (!validarIP(ip)) {
         resultadoDiv.innerHTML = '<p style="color: red;">Endereço IP inválido. Tente novamente.</p>';
         return;
     }
