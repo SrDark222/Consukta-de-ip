@@ -1,33 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta de IP e HWID</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de IP</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="main-container">
-    <div id="banner">
-      <h1>Consulta de IP e Geração de HWID</h1>
-      <p>Digite o seu IP para consultar ou gerar um HWID exclusivo</p>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Logo" class="logo">
+            <h1>Consulta de IP</h1>
+        </header>
+        <main>
+            <input type="text" id="ipInput" placeholder="Digite um endereço IP">
+            <button id="consultarBtn">Consultar</button>
+            <div id="resultado" class="resultado"></div>
+        </main>
     </div>
-    <div id="ip-query">
-      <input type="text" id="ip-address" placeholder="Digite o IP">
-      <button onclick="consultarIP()">Consultar IP</button>
-      <div id="loading" style="display: none;">
-        <img src="loading.gif" alt="Carregando...">
-      </div>
-      <div id="results"></div>
-    </div>
-    <div id="hwid-section">
-      <button onclick="gerarHWID()">Gerar HWID</button>
-      <div id="hwid-result"></div>
-    </div>
-    <div id="footer">
-      <p>&copy; 2025 StickXIP - Todos os direitos reservados</p>
-    </div>
-  </div>
+    <script src="script.js"></script>
 </body>
 </html>
