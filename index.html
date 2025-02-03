@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Dados</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de IP</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Consulta de Dados</h1>
-        <input type="text" id="consultaInput" placeholder="Digite um IP...">
-        <button onclick="consultar()">Consultar</button>
-
-        <!-- Menu para selecionar as respostas da API -->
-        <div id="menu" class="menu">
-            <button onclick="mostrarIpInfo()">Mostrar Dados de IP</button>
-            <button onclick="mostrarLocalizacao()">Mostrar Localização no Mapa</button>
-            <button onclick="mostrarEndereco()">Mostrar Endereço</button>
-        </div>
-
-        <!-- Área de resultados com Scroll -->
-        <div id="resultado"></div>
-        
-        <!-- Área com as informações (vai aparecer somente após consulta) -->
-        <div id="infoScroll" class="info-scroll" style="display: none;">
-            <h2>Informações sobre seu IP:</h2>
-            <div id="ip-info"></div>
-            <div id="map" class="map"></div>
-        </div>
-
-        <!-- Gif de Carregamento -->
-        <div id="loading" class="loading" style="display: none;">
-            <img src="loading.gif" alt="Carregando...">
-        </div>
+  <!-- Conteúdo principal -->
+  <div id="main-container">
+    <div id="scrolling-container">
+      <h1>Consulta de IP</h1>
+      <div class="input-container">
+        <input type="text" id="ip-address" placeholder="Digite o IP">
+        <button onclick="consultarIP()">Consultar</button>
+      </div>
+      <div id="loading" style="display: none;">
+        <img src="loading.gif" alt="Carregando...">
+      </div>
+      <div id="results"></div>
+      <div id="map"></div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <!-- Caixa de informações -->
+  <div id="info-container">
+    <h2>Informações</h2>
+    <div id="ip-info"></div>
+    <div id="location-info"></div>
+  </div>
+
 </body>
 </html>
