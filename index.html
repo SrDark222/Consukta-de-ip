@@ -10,15 +10,29 @@
 <body>
     <div class="container">
         <h1>Consulta de Dados</h1>
-        <input type="text" id="consultaInput" placeholder="Digite algo...">
+        <input type="text" id="consultaInput" placeholder="Digite um IP...">
         <button onclick="consultar()">Consultar</button>
-        <div id="resultado"></div>
 
-        <div id="infoScroll" class="info-scroll">
+        <!-- Menu para selecionar as respostas da API -->
+        <div id="menu" class="menu">
+            <button onclick="mostrarIpInfo()">Mostrar Dados de IP</button>
+            <button onclick="mostrarLocalizacao()">Mostrar Localização no Mapa</button>
+            <button onclick="mostrarEndereco()">Mostrar Endereço</button>
+        </div>
+
+        <!-- Área de resultados com Scroll -->
+        <div id="resultado"></div>
+        
+        <!-- Área com as informações (vai aparecer somente após consulta) -->
+        <div id="infoScroll" class="info-scroll" style="display: none;">
             <h2>Informações sobre seu IP:</h2>
             <div id="ip-info"></div>
-            <h3>Localização no Mapa:</h3>
             <div id="map" class="map"></div>
+        </div>
+
+        <!-- Gif de Carregamento -->
+        <div id="loading" class="loading" style="display: none;">
+            <img src="loading.gif" alt="Carregando...">
         </div>
     </div>
     <script src="script.js"></script>
